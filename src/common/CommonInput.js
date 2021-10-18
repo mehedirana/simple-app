@@ -3,7 +3,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const CustomInput = ({
+const CommonInput = ({
   cWidth,
   cleft,
   onChangeText,
@@ -15,25 +15,24 @@ const CustomInput = ({
   keyboardType,
   iname,
   errMess,
-  color,
 }) => {
   return (
     <Input
-      inputStyle={{ color: "black",borderColor:'red' }}
+      inputStyle={{ color: "#004dcf", borderColor: "red" }}
       style={{
         paddingLeft: RFValue(10),
         paddingRight: RFValue(10),
         borderRadius: RFValue(4),
         fontSize: RFValue(15),
-        borderColor:'red'
+        borderColor: "#004dcf",
       }}
       leftIcon={{
         type: "font-awesome",
         name: iname,
-        color: "rgba(167,203,62,255)",
+        color: "#004dcf",
       }}
       secureTextEntry={secureTextEntry}
-      placeholderTextColor={color}
+      placeholderTextColor="#004dcf"
       placeholder={placeholder}
       value={value}
       onFocus={() => onFocus()}
@@ -44,8 +43,7 @@ const CustomInput = ({
       keyboardType={keyboardType}
       errorStyle={{ color: "red" }}
       // errMessage="abc"
-      
     />
   );
 };
-export default CustomInput;
+export default CommonInput;

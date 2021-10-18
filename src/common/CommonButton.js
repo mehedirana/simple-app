@@ -1,17 +1,17 @@
 import React from "react";
 import { Button } from 'react-native-elements';
 import { RFValue } from "react-native-responsive-fontsize";
-const CustomBtn = ({ title, onPress, cWidth , backColor, cHeight, titleColor, bWidth }) => {
+const CommonBtn = ({ title, onPress, cWidth , backColor, cHeight, titleColor, bWidth }) => {
  
   return (
    
       <Button    
         buttonStyle={{
-          height:cHeight,
-          width: cWidth ? cWidth : '38%',
+          // height:cHeight,
+          // width: cWidth ? cWidth : '38%',
           alignSelf: "center",
-          borderRadius: cWidth ? 20 : 8,
-          borderWidth: bWidth,
+          // borderRadius: cWidth ? 20 : 8,
+          // borderWidth: bWidth,
           borderColor: bWidth ? 'rgba(167,203,62,255)' : null,
           paddingTop:RFValue(5), paddingLeft:RFValue(5), paddingRight:RFValue(5), paddingBottom:RFValue(5)
           
@@ -24,4 +24,4 @@ const CustomBtn = ({ title, onPress, cWidth , backColor, cHeight, titleColor, bW
       />
   );
 };
-export default CustomBtn;
+export default CommonBtn;
