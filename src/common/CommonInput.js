@@ -42,7 +42,7 @@ const CommonInput = ({
       editable={editable}
       keyboardType={keyboardType}
       errorStyle={{ color: "red" }}
-      errMessage={errMess}
+      errorMessage={errMess}
     />
   );
 };

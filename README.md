@@ -10,6 +10,7 @@ npm install @react-navigation/native-stack
 npm i axios
 npm i react-native-responsive-fontsize
 npm install react-native-elements
-
+npm install react-hook-form
+npm i @hookform/error-message
 
 ```
