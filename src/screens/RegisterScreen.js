@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
-const url = "https://developer.wordpress.org/rest-api/reference/users/#create-a-user";
-
+const url = "https://apptest.dokandemo.com/wp-json/wp/v2/users/register";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -13,30 +18,49 @@ const RegisterScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(false);
   const [error, setError] = useState(false);
 
-  const isNotValidName = name == '' ;
-  const isNotValidEmail = email == '' ;
-  const isNotValidPassword = password == '';
-  const errorMsgName = isNotValidName ? 'Name is required.' : '';
-  const errorMsgEmail = isNotValidEmail ? 'Email is required.' : '';
-  const errorMsgPassword = isNotValidPassword ? 'Password is required.' : '';
+  const isNotValidName = name == "";
+  const isNotValidEmail = email == "";
+  const isNotValidPassword = password == "";
+  const errorMsgName = isNotValidName ? "Name is required." : "";
+  const errorMsgEmail = isNotValidEmail ? "Email is required." : "";
+  const errorMsgPassword = isNotValidPassword ? "Password is required." : "";
 
+  const handleSubmit = (data) => {
+    console.log({ data });
+  };
 
-  const handleSubmit =(data)=>{
-     console.log({data});
-  }
-
-  const handleChange =(input)=>{
-    console.log({input});
-  }
+  const handleChange = (input) => {
+    console.log({ input });
+  };
 
   const handleRegister = async () => {
-    // const res = await axios.post(url, {
-    //   username: "john",
-    //   email: "john@doe.com",
-    //   password: "demo",
-    // });
+    console.log("called", name, email, password, url);
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-    console.log('gd');
+    const config = {
+      headers: {
+      'Content-Type': 'application/json',
+      }
+    };
+
+    try {
+      const res = await axios.post(
+        url,
+        {
+          username: name,
+          email: email,
+          password: password,
+        },
+        config
+      );
+
+      console.log("gd", res);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <SafeAreaView
@@ -60,7 +84,7 @@ const RegisterScreen = ({ navigation }) => {
         errMess={errorMsgName}
         // renderErrorMessage={name ==='' ? true : false}
       />
-       <Text>user email</Text>
+      <Text>user email</Text>
       <CommonInput
         placeholder="User Email"
         secureTextEntry={false}
@@ -73,7 +97,7 @@ const RegisterScreen = ({ navigation }) => {
         onFocus={(t) => setIsFocus(t)}
         errMess={errorMsgEmail}
       />
-       <Text>user password</Text>
+      <Text>user password</Text>
       <CommonInput
         placeholder="User Password"
         secureTextEntry={false}
@@ -85,6 +109,7 @@ const RegisterScreen = ({ navigation }) => {
         // renderErrorMessage={password == '' ? true : false }
         onFocus={(t) => setIsFocus(t)}
         errMess={errorMsgPassword}
+        secureTextEntry={true}
       />
 
       <CommonBtn
@@ -99,7 +124,6 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={{ color: "#004dcf", fontWeight: "bold" }}>Log in</Text>
         </TouchableOpacity>
       </View>
-  
     </SafeAreaView>
   );
 };

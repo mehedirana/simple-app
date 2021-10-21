@@ -2,36 +2,68 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
+import  axios  from 'axios';
+
+const URL = 'http://apptest.dokandemo.com/wp-json/jwt-auth/v1/token'
 
 const LoginScreen = ({ navigation }) => {
-  const [phone, setPhone] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isFocus, setIsFocus] = useState(false);
 
-  const handleLogin =()=>{
-    navigation.navigate('Home')
+  const handleLogin = async()=>{
+  
+    const config = {
+      headers: {
+      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+ 
+      }
+    };
+
+    try {
+
+      console.log(URL, userName, password);
+      
+      const res = await axios.post(
+        URL,
+        {
+          username: userName,
+          password: password,
+        },
+        config
+      );
+
+      console.log("gd", res);
+    } catch (error) {
+      console.log(error);
+    }
+    // navigation.navigate('Home')
   }
 
   return (
     <SafeAreaView
       style={{ flex: 1,  backgroundColor: "#FFF", alignItems:'center', justifyContent:'center' }}
     >
+      <Text>User Name</Text>
       <CommonInput
-        placeholder="Enter Your Phone"
+        placeholder="Enter User Name"
         secureTextEntry={false}
         editable={true}
         keyboardType="numeric"
         iname="phone"
-        value={phone}
-        onChangeText={(t) => setPhone(t)}
+        value={userName}
+        onChangeText={(t) => setUserName(t)}
         onFocus={(t)=> setIsFocus(t)}
       />
+      <Text>Password</Text>
       <CommonInput
         placeholder="Enter Your Password"
         secureTextEntry={false}
         editable={true}
         keyboardType="default"
         iname="lock"
+        secureTextEntry={true}
         value={password}
         onChangeText={(t) => setPassword(t)}
         onFocus={(t)=> setIsFocus(t)}
