@@ -1,6 +1,6 @@
 import httpClient from "axios";
-import { loginURL } from "../../utils/proxyUrl";
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS } from "../actionTypes";
+import { loginURL, registerURL } from "../../utils/proxyUrl";
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../actionTypes";
 
 
 const config = {
@@ -26,3 +26,4 @@ export const login = (username, password) => async (dispatch) => {
         dispatch({ type: USER_LOGIN_FAIL, error: error })
     }
 }
+

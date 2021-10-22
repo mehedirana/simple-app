@@ -6,17 +6,22 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
+  Alert
 } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
-const url = "https://apptest.dokandemo.com/wp-json/wp/v2/users/register";
+import { registerURL } from "../utils/proxyUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../store/user/register/registerAction";
+
 
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState("mehedi");
-  const [email, setEmail] = useState("mehedi@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
   const isNotValidName = name == "";
   const isNotValidEmail = email == "";
@@ -24,39 +29,27 @@ const RegisterScreen = ({ navigation }) => {
   const errorMsgName = isNotValidName ? "Name is required." : "";
   const errorMsgEmail = isNotValidEmail ? "Email is required." : "";
   const errorMsgPassword = isNotValidPassword ? "Password is required." : "";
+ 
+  const { error, loading, success } = useSelector((state) => state.userRegister)
+  console.log({ error }, { loading }, { success });
+  const dispatch = useDispatch();
 
 
-
-  const handleRegister = async () => {
-    console.log("called", name, email, password, url);
-    // const headers = {
-    //   'Accept': 'application/json',
-    //   'Content-Type': 'application/json',
-    // };
-
-    const config = {
-      headers: {
-        'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      }
-  };
-
-    try {
-      const res = await axios.post(
-        url,
-        {
-          username: name,
-          email: email,
-          password: password,
-        },
-        config
-      );
-
-      console.log("gd", res);
-    } catch (error) {
-      console.log(error);
+  const handleRegister =  () => {
+    if(!name){
+      alert('User name required')
     }
+    else if(!email){
+      alert('User email required')
+    }
+    else if(!password) {
+      alert('password required')
+    }else{
+      dispatch(register(name, email, password))
+    }
+    
   };
+
   return (
     <SafeAreaView
       style={{
@@ -66,7 +59,10 @@ const RegisterScreen = ({ navigation }) => {
         justifyContent: "center",
       }}
     >
-      <Text>user name</Text>
+      {
+        loading ? <ActivityIndicator size="large" color="#00ff00" /> : (
+          <>
+          <Text>user name</Text>
       <CommonInput
         placeholder="User Name"
         secureTextEntry={false}
@@ -119,6 +115,11 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={{ color: "#004dcf", fontWeight: "bold" }}>Log in</Text>
         </TouchableOpacity>
       </View>
+
+          </>
+        )
+      }
+      
     </SafeAreaView>
   );
 };
