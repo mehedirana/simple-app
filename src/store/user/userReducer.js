@@ -9,13 +9,14 @@ export const userReducer =(state={}, action)=>{
             success: false,
           };
         case USER_LOGIN_SUCCESS:
-            console.log(action.payload);
+        
           return {
             ...state,
             loading: false,
-            // token: action.payload.token,
-            // user: action.payload.user,
-            // message: action.payload.msg,
+            token: action.payload.token,
+            user_display_name: action.payload.user_display_name,
+            user_email: action.payload.user_email,
+            user_nicename: action.payload.user_nicename,
             success: true,
           };
         case USER_LOGIN_FAIL:

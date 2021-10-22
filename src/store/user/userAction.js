@@ -8,7 +8,7 @@ const config = {
     }
   };
 
-export const login =async(username, password)=> (dispatch)=>{
+export const login =(username, password)=> async (dispatch)=>{
     try {
         dispatch({type: USER_LOGIN_REQUEST});
 
