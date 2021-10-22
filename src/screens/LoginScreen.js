@@ -13,25 +13,25 @@ const LoginScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const { token, loading, success } = useSelector((state) => state.user)
-  console.log({ token }, { loading }, { success });
-  const dispatch = useDispatch();
-  // 'Content-Type': 'application/x-www-form-urlencoded',
-  const handleLogin = async () => {
-    
-    if(!userName) alert('User name required');
-    else if(!password) alert('Password required');
 
-    else{
+  const dispatch = useDispatch();
+
+  const handleLogin = async () => {
+
+    if (!userName) alert('User name required');
+    else if (!password) alert('Password required');
+
+    else {
       try {
         const res = await dispatch(login(userName, password));
         console.log(res);
-        
+
       } catch (error) {
-        
+
       }
-      
+
     }
-    
+
 
   }
 

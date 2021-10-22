@@ -1,12 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import CommonBtn from '../common/CommonButton';
 import { useDispatch, useSelector } from "react-redux";
+import CommonInput from '../common/CommonInput';
+import axios from 'axios';
+import { updateUserURL } from '../utils/proxyUrl';
+
 
 const UpdateProfileScreen = ({ navigation }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [isFocus, setIsFocus] = useState(false);
 
-  const handleProfileUpdate = () => {
+  const { token, loading, success } = useSelector((state) => state.user)
 
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    ()=>(
+      handleProfileUpdate()
+    )()
+    
+  },[])
+
+
+  const config = {
+    headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+    }
+};
+  
+
+  const handleProfileUpdate = async () => {
+      try {
+           const res= await axios.post(updateUserURL,{firstName, lastName}, config)
+
+           if(res.data){
+              setFirstName(res.data.first_name)
+              setLastName(res.data.last_name)
+           }
+          //  console.log(res.data);
+      } catch (error) {
+        console.log(error, error.response.data);
+      }
   }
   return (
     <SafeAreaView
@@ -17,15 +55,26 @@ const UpdateProfileScreen = ({ navigation }) => {
         justifyContent: "center",
       }}
     >
-      <Text>User Name</Text>
+      <Text>User first Name</Text>
       <CommonInput
-        placeholder="Enter User Name"
+        placeholder="User first Name"
         secureTextEntry={false}
         editable={true}
         keyboardType="default"
         iname="phone"
-        value={userName}
-        onChangeText={(t) => setUserName(t)}
+        value={firstName}
+        onChangeText={(t) => setFirstName(t)}
+        onFocus={(t) => setIsFocus(t)}
+      />
+      <Text>User last Name</Text>
+      <CommonInput
+        placeholder="User last Name"
+        secureTextEntry={false}
+        editable={true}
+        keyboardType="default"
+        iname="phone"
+        value={lastName}
+        onChangeText={(t) => setLastName(t)}
         onFocus={(t) => setIsFocus(t)}
       />
       <CommonBtn
