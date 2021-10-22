@@ -78,7 +78,7 @@ const RegisterScreen = ({ navigation }) => {
               placeholder="User Name"
               secureTextEntry={false}
               editable={true}
-              keyboardType="numeric"
+              keyboardType="default"
               iname="user"
               value={name}
               onChangeText={(t) => setName(t)}
@@ -91,7 +91,7 @@ const RegisterScreen = ({ navigation }) => {
               placeholder="User Email"
               secureTextEntry={false}
               editable={true}
-              keyboardType="default"
+              keyboardType="email-address"
               iname="envelope"
               value={email}
               // renderErrorMessage={email === '' ? true : false}

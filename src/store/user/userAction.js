@@ -1,6 +1,6 @@
 import httpClient from "axios";
 import { loginURL, registerURL } from "../../utils/proxyUrl";
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS} from "../actionTypes";
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } from "../actionTypes";
 
 
 const config = {
@@ -18,12 +18,17 @@ export const login = (username, password) => async (dispatch) => {
         if (!res || !res.data || !res.data.token) {
             dispatch({ type: USER_LOGIN_FAIL, error: res.data })
         }
-        // const { token, user_email, user_nicename, user_display_name } = res.data;
+
         dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data })
 
     } catch (error) {
-        console.log(error);
-        dispatch({ type: USER_LOGIN_FAIL, error: error })
+        if (error.response.data) {
+            dispatch({ type: USER_LOGIN_FAIL, payload: error.response.data })
+            return error.response.data
+        } else {
+            dispatch({ type: USER_LOGIN_FAIL, error: error })
+            return error
+        }
     }
 }
 

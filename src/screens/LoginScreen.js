@@ -22,7 +22,14 @@ const LoginScreen = ({ navigation }) => {
     else if(!password) alert('Password required');
 
     else{
-      dispatch(login(userName, password))
+      try {
+        const res = await dispatch(login(userName, password));
+        console.log(res);
+        
+      } catch (error) {
+        
+      }
+      
     }
     
 
@@ -40,7 +47,7 @@ const LoginScreen = ({ navigation }) => {
               placeholder="Enter User Name"
               secureTextEntry={false}
               editable={true}
-              keyboardType="numeric"
+              keyboardType="default"
               iname="phone"
               value={userName}
               onChangeText={(t) => setUserName(t)}
