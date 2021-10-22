@@ -1,0 +1,1 @@
+export const loginURL = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token';

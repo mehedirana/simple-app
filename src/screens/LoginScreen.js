@@ -20,31 +20,6 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = () => {
 
     dispatch(login(userName, password))
-    // const config = {
-    //   headers: {
-    //   'Content-Type': 'application/json',
-
-
-    //   }
-    // };
-
-    // try {
-
-    //   console.log(URL, userName, password);
-
-    //   const res = await axios.post(
-    //     URL,
-    //     {
-    //       username: userName,
-    //       password: password,
-    //     },
-    //     config
-    //   );
-
-    //   console.log("gd", res.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
     // navigation.navigate('Home')
   }
 

@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 const composeEnhancers = composeWithDevTools({
     realtime: true,
     port: 3000,
-    hostname: "192.168.112.173",
+    hostname: "59.153.101.167",
 })
 
 

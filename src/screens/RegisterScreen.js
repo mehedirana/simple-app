@@ -12,9 +12,9 @@ import CommonInput from "../common/CommonInput";
 const url = "https://apptest.dokandemo.com/wp-json/wp/v2/users/register";
 
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("mehedi");
+  const [email, setEmail] = useState("mehedi@gmail.com");
+  const [password, setPassword] = useState("123456");
   const [isFocus, setIsFocus] = useState(false);
   const [error, setError] = useState(false);
 
@@ -25,26 +25,21 @@ const RegisterScreen = ({ navigation }) => {
   const errorMsgEmail = isNotValidEmail ? "Email is required." : "";
   const errorMsgPassword = isNotValidPassword ? "Password is required." : "";
 
-  const handleSubmit = (data) => {
-    console.log({ data });
-  };
 
-  const handleChange = (input) => {
-    console.log({ input });
-  };
 
   const handleRegister = async () => {
     console.log("called", name, email, password, url);
-    const headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    };
+    // const headers = {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/json',
+    // };
 
     const config = {
       headers: {
-      'Content-Type': 'application/json',
+        'Accept': 'application/json',
+          'Content-Type': 'application/json',
       }
-    };
+  };
 
     try {
       const res = await axios.post(
