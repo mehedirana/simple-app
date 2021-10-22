@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
-import CommonBtn from '../common/CommonButton'
+import CommonBtn from '../common/CommonButton';
+import { useDispatch, useSelector } from "react-redux";
 
 const UpdateProfileScreen =({navigation})=> {
 
     const handleProfileUpdate =()=>{
-
+       
     }
     return (
         <SafeAreaView

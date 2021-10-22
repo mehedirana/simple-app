@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
-import axios from 'axios';
 import { login } from "../store/user/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
-const URL = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token'
+
 
 const LoginScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -17,10 +16,16 @@ const LoginScreen = ({ navigation }) => {
   console.log({ token }, { loading }, { success });
   const dispatch = useDispatch();
   // 'Content-Type': 'application/x-www-form-urlencoded',
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    
+    if(!userName) alert('User name required');
+    else if(!password) alert('Password required');
 
-    dispatch(login(userName, password))
-    // navigation.navigate('Home')
+    else{
+      dispatch(login(userName, password))
+    }
+    
+
   }
 
   return (

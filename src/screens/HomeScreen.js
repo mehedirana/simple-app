@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import CommonBtn from "../common/CommonButton";
+import { logout } from "../store/user/userAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const HomeScreen = ({navigation}) => {
+  const dispatch = useDispatch();
 
     const handleLogOut =()=>{
-
+        dispatch(logout())
     }
   return (
     <SafeAreaView
