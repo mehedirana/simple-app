@@ -18,17 +18,16 @@ export const register = (username, email, password) => async (dispatch) =>{
         if (!res || !res.data) {
             dispatch({ type: USER_REGISTER_FAIL, error: res.data })
         }
-
-        console.log('ho raha hain...',res.data);
-        // const { token, user_email, user_nicename, user_display_name } = res.data;
         dispatch({ type: USER_REGISTER_SUCCESS, payload: res.data })
+        return res.data
     } catch (error) {
         if(error.response.data){
-            // console.log('oh no', error.response.data);
             dispatch({ type: USER_REGISTER_FAIL, payload: error.response.data })
+            return error.response.data
         }else {
-            // console.log('oh no 22222', error);
+
             dispatch({ type: USER_REGISTER_FAIL, payload: error })
+            return error
         } 
         
         
