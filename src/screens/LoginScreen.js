@@ -4,19 +4,19 @@ import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
 import  axios  from 'axios';
 
-const URL = 'http://apptest.dokandemo.com/wp-json/jwt-auth/v1/token'
+const URL = 'https://apptest.dokandemo.com/wp-json/jwt-auth/v1/token'
 
 const LoginScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-
+  // 'Content-Type': 'application/x-www-form-urlencoded',
   const handleLogin = async()=>{
   
     const config = {
       headers: {
-      // 'Content-Type': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+    
  
       }
     };
@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
         config
       );
 
-      console.log("gd", res);
+      console.log("gd", res.data);
     } catch (error) {
       console.log(error);
     }
