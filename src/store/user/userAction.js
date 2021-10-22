@@ -17,6 +17,7 @@ export const login =async(username, password)=> (dispatch)=>{
         if(!res || !res.data || !res.data.token){
            dispatch({type: USER_LOGIN_FAIL, error: res.data})
         }
+        // const { token, user_email, user_nicename, user_display_name } = res.data;
         dispatch({type: USER_LOGIN_SUCCESS, payload: res.data})
 
     } catch (error) {

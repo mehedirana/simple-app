@@ -12,5 +12,8 @@ npm i react-native-responsive-fontsize
 npm install react-native-elements
 npm install react-hook-form
 npm i @hookform/error-message
-
+npm install redux
+npm install react-redux
+npm install --save redux-thunk
+npm i redux-devtools-extension
 ```
