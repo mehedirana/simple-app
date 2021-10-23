@@ -1,51 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
-import CommonBtn from '../common/CommonButton';
+import React, { useEffect, useState } from "react";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import CommonBtn from "../common/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
-import CommonInput from '../common/CommonInput';
-import axios from 'axios';
-import { updateUserURL } from '../utils/proxyUrl';
-
+import CommonInput from "../common/CommonInput";
+import axios from "axios";
+import { updateUserURL } from "../utils/proxyUrl";
 
 const UpdateProfileScreen = ({ navigation }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isFocus, setIsFocus] = useState(false);
 
-  const { token, loading, success } = useSelector((state) => state.user)
+  const { token } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    ()=>(
+  useEffect(() => {
+    let mounted = true;
+    const test =()=>{
       handleProfileUpdate()
-    )()
-    
-  },[])
+    }
+     test()
 
+     return function cleanup() {
+      mounted = false;
+    };
+  }, [token]);
 
   const config = {
     headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-    }
-};
-  
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    },
+  };
 
   const handleProfileUpdate = async () => {
-      try {
-           const res= await axios.post(updateUserURL,{firstName, lastName}, config)
+    try {
+      const res = await axios.post(
+        updateUserURL,
+        { firstName, lastName },
+        config
+      );
 
-           if(res.data){
-              setFirstName(res.data.first_name)
-              setLastName(res.data.last_name)
-           }
-          //  console.log(res.data);
-      } catch (error) {
-        console.log(error, error.response.data);
+      if (res.data) {
+        setFirstName(res.data.first_name);
+        setLastName(res.data.last_name);
       }
-  }
+       
+    } catch (error) {
+      console.log(error, error.response.data);
+    }
+  };
   return (
     <SafeAreaView
       style={{
@@ -85,11 +91,13 @@ const UpdateProfileScreen = ({ navigation }) => {
       />
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Text style={{ color: "#004dcf", fontWeight: "bold" }}>Back To Home</Text>
+          <Text style={{ color: "#004dcf", fontWeight: "bold" }}>
+            Back To Home
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default UpdateProfileScreen;
