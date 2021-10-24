@@ -1,5 +1,5 @@
 import httpClient from "axios";
-import { loginURL, registerURL } from "../../utils/proxyUrl";
+import { loginURL, registerURL } from "../../utilites/proxyUrl";
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS } from "../actionTypes";
 
 

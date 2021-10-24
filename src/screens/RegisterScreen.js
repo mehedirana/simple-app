@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
-import { registerURL } from "../utils/proxyUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/user/register/registerAction";
 

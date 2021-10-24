@@ -1,5 +1,5 @@
 import httpClient from "axios";
-import { registerURL } from "../../../utils/proxyUrl";
+import { registerURL } from "../../../utilites/proxyUrl";
 import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../../actionTypes";
 
 

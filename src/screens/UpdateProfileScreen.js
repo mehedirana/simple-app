@@ -4,7 +4,7 @@ import CommonBtn from "../common/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
 import CommonInput from "../common/CommonInput";
 import axios from "axios";
-import { updateUserURL } from "../utils/proxyUrl";
+import { updateUserURL } from "../utilites/proxyUrl";
 
 const UpdateProfileScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState("");
@@ -30,8 +30,8 @@ const UpdateProfileScreen = ({ navigation }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/json",
     },
   };
 
@@ -39,14 +39,17 @@ const UpdateProfileScreen = ({ navigation }) => {
     try {
       const res = await axios.post(
         updateUserURL,
-        { firstName, lastName },
+        { first_name: firstName, last_name : lastName },
         config
       );
 
       if (res.data) {
+        alert('Your profile update successfully')
         setFirstName(res.data.first_name);
         setLastName(res.data.last_name);
       }
+
+      console.log(res.data);
        
     } catch (error) {
       console.log(error, error.response.data);
