@@ -17,4 +17,5 @@ npm install react-redux
 npm install --save redux-thunk
 npm i redux-devtools-extension
 npm i react-native-dotenv
+
 ```

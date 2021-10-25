@@ -12,12 +12,14 @@ export const profileReducer = (state = {}, action) => {
                 ...state,
                 success: true,
                 loading: false,
-                userProfile: action.payload
+                userProfile: action.payload,
+                msg: null
             }
         case GET_ACCOUNT_DETAILS_FAIL:
             return {
                 success: false,
                 loading: false,
+                error: action.payload,
             }
         case ACCOUNT_UPDATE_REQUEST:
             return {
@@ -38,11 +40,12 @@ export const profileReducer = (state = {}, action) => {
                 ...state,
                 success: false,
                 loading: false,
+                error: action.payload,
                 msg : 'Profile Update Failed'
             }
 
 
         default:
-            state;
+           return  state;
     }
 }

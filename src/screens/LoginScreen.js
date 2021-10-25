@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
-import { login } from "../store/user/userAction";
+import { login } from "../store/user/authentication/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 
