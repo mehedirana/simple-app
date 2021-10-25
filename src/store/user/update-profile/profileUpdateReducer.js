@@ -9,6 +9,7 @@ export const profileReducer = (state = {}, action) => {
             }
         case GET_ACCOUNT_DETAILS_SUCCESS:
             return {
+                ...state,
                 success: true,
                 loading: false,
                 userProfile: action.payload
@@ -20,19 +21,24 @@ export const profileReducer = (state = {}, action) => {
             }
         case ACCOUNT_UPDATE_REQUEST:
             return {
+                ...state,
                 success: false,
                 loading: true,
             }
         case ACCOUNT_UPDATE_SUCCESS:
             return {
+                ...state,
                 success: true,
                 loading: false,
                 userProfile: action.payload,
+                msg: 'Profile Update Successfully'
             }
         case ACCOUNT_UPDATE_FAIL:
             return {
+                ...state,
                 success: false,
                 loading: false,
+                msg : 'Profile Update Failed'
             }
 
 
