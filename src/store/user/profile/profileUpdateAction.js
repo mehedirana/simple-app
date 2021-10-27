@@ -1,8 +1,7 @@
 import axios from "axios"
 import { userProfileURL } from "../../../utilites/proxyUrl"
 import { ACCOUNT_UPDATE_FAIL, ACCOUNT_UPDATE_REQUEST, ACCOUNT_UPDATE_SUCCESS, GET_ACCOUNT_DETAILS_FAIL, GET_ACCOUNT_DETAILS_REQUEST, GET_ACCOUNT_DETAILS_SUCCESS } from "../../actionTypes"
-// "Accept": "application/json",
-// "Content-Type": "application/json",
+
 export const profileDetails = (token) => async (dispatch) => {
     try {
         const config = {
@@ -15,11 +14,7 @@ export const profileDetails = (token) => async (dispatch) => {
         dispatch({ type: GET_ACCOUNT_DETAILS_REQUEST })
         console.log(config);
 
-        const res = await axios.post('https://apptest.dokandemo.com/wp-json/wp/v2/users/me',{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
+        const res = await axios.post(userProfileURL,config)
 
         if (!res || !res.data) {
             dispatch({ type: GET_ACCOUNT_DETAILS_FAIL, error: res.data })

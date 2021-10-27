@@ -20,7 +20,7 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-  // const [error, setError] = useState(false);
+
 
   const isNotValidName = name == "";
   const isNotValidEmail = email == "";

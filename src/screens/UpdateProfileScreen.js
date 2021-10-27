@@ -13,7 +13,7 @@ const UpdateProfileScreen = ({ navigation }) => {
   const { token } = useSelector((state) => state.user);
   const { userProfile, loading, msg, success, error } = useSelector((state) => state.profile);
 
-  // console.log('yes', {userProfile}, {error}, {msg});
+ 
 
   const dispatch = useDispatch();
 
