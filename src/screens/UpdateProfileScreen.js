@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import CommonBtn from "../common/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
 import CommonInput from "../common/CommonInput";
@@ -11,34 +11,56 @@ const UpdateProfileScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(false);
 
   const { token } = useSelector((state) => state.user);
-  const { userProfile, loading, msg, success } = useSelector((state) => state.profile);
+  const { userProfile, loading, msg, success, error } = useSelector((state) => state.profile);
 
-  console.log('yes', userProfile);
+  // console.log('yes', {userProfile}, {error}, {msg});
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    if(loading === false && success === true && msg){
-      alert(msg)
-    }
-  },[msg, loading])
 
-  useEffect(() => {
-    let mounted = true;
 
-    if (token) {
-      dispatch(profileDetails(token))
-    }
+  // useEffect(() => {
+  //   let mounted = true;
 
-    return function cleanup() {
-      mounted = false;
-    };
-  }, [token]);
+  //   if (token) {
+  //     dispatch(profileDetails(token))
+  //   }
+
+  //   return function cleanup() {
+  //     mounted = false;
+  //   };
+  // }, [token]);
 
 
 
   const handleProfileUpdate = async () => {
-    dispatch(profileUpdate(token, firstName, lastName));
+    if(firstName || lastName){
+    const res = await dispatch(profileUpdate(token, firstName, lastName));
+    
+    if(res){
+      try {
+        if(res.first_name && res.last_name){
+          Alert.alert(
+            'Profile Updated',
+            `First Name : ${res.first_name} and Last Name : ${res.last_name}`,
+            [
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ],
+            { cancelable: true }
+          );
+          
+        }
+        else{
+          console.log(res);
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
+     
+      
+    }
+  } else Alert('Name field required')
   };
   return (
     <SafeAreaView

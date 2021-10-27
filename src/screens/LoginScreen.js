@@ -4,7 +4,7 @@ import CommonBtn from "../common/CommonButton";
 import CommonInput from "../common/CommonInput";
 import { login } from "../store/user/authentication/userAction";
 import { useDispatch, useSelector } from "react-redux";
-
+// import ReactTextFormat from 'react-text-format';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -24,7 +24,10 @@ const LoginScreen = ({ navigation }) => {
     else {
       try {
         const res = await dispatch(login(userName, password));
-        console.log(res);
+        if(res.message){
+          alert(res.message)
+        }
+        console.log(res,res.message);
 
       } catch (error) {
 
