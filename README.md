@@ -1,5 +1,6 @@
 # simple-app
 =======
+# Using WP API (Sign up, Sign in, Update profile)
 
 ## Getting Started
 
